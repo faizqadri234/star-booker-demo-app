@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Rating from "../../atoms/rating/Rating";
 import { CelebrityProfileHeaderProps } from "./types";
 
@@ -8,7 +8,7 @@ const CelebrityProfileHeader = (props: CelebrityProfileHeaderProps) => {
         <View>
             <ImageBackground style={styles.coverPicture} source={require('../../../assets/images/cover.png')}>
                 <SafeAreaView />
-                <View style={styles.headerContainer}>
+                <View style={[styles.headerContainer, Platform.OS === 'android' && {marginTop: 10}]}>
                     <TouchableOpacity onPress={() => props.onPressBackButton()}>
                         <Image source={require('../../../assets/icons/back.png')} />
                     </TouchableOpacity>
