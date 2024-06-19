@@ -9,7 +9,7 @@ const Rating = (props: RatingProps) => {
                 {props.rating}
             </Text>
             <View style={styles.ratingIcon}>
-                {Array.from(Array(props.rating)).map((item, index) => {
+                {Array.from(Array(props.rating)).map((_, index) => {
                     return (
                         <Image key={index} source={require('../../../assets/icons/fullStar.png')} />
                     )

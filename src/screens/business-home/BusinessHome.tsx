@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import AppHeader from "../../components/molecules/app-header/AppHeader";
 import GenderFilter from "../../components/atoms/gender-filter/GenderFilter";
-import AppButton from "../../components/atoms/app-button/AppButton";
-import CelebrityCard from "../../components/molecules/celebrity-card/CelebrityCard";
 import CelebrityList from "../../components/organisms/celebrity-list/CelebrityList";
 import CelebrityFilters from "../../components/molecules/celebrity-filters/CelebrityFilters";
 import { HomeScreenData } from "../../mocks/BusinessHome";

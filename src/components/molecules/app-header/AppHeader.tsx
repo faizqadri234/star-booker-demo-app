@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { SafeAreaView, StyleSheet, View } from "react-native"
 import MenuBar from "../../atoms/menu-bar/MenuBar"
 import SearchBar from "../../atoms/search-bar/SearchBar"
 
