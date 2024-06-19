@@ -9,7 +9,7 @@ import CelebrityFilters from "../../components/molecules/celebrity-filters/Celeb
 import { HomeScreenData } from "../../mocks/BusinessHome";
 import { useNavigation } from "@react-navigation/native";
 
-const BusinessHome = (props) => {
+const BusinessHome = () => {
     const [genderFilter, setGenderFilter] = useState<'men' | 'women'>('men')
     const [selectedFilterIndex, setSelectedFilterIndex] = useState(0)
     const navigation = useNavigation()
