@@ -1,31 +1,49 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppHeader from "../../components/molecules/app-header/AppHeader";
 import GenderFilter from "../../components/atoms/gender-filter/GenderFilter";
 import AppButton from "../../components/atoms/app-button/AppButton";
 import CelebrityCard from "../../components/molecules/celebrity-card/CelebrityCard";
+import CelebrityList from "../../components/organisms/celebrity-list/CelebrityList";
+import CelebrityFilters from "../../components/molecules/celebrity-filters/CelebrityFilters";
+import { HomeScreenData } from "../../mocks/BusinessHome";
+import { useNavigation } from "@react-navigation/native";
 
-const BusinessHome = () => {
+const BusinessHome = (props) => {
     const [genderFilter, setGenderFilter] = useState<'men' | 'women'>('men')
+    const [selectedFilterIndex, setSelectedFilterIndex] = useState(0)
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
             <AppHeader />
             <GenderFilter onPressFilter={(type) => setGenderFilter(type)} filterType={genderFilter} />
-            <View style={{ marginLeft: 20 }}>
-                <View style={{ marginTop: 29 }}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingRight: 20}}>
-                        <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', borderRadius: 20 }}>Trending Celebrities</Text>
-                        <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={{ fontSize: 12, fontWeight: '400', color: '#F7F7F7' }}>
-                                View all
-                            </Text>
-                            <Image style={{marginLeft: 5}} source={require('../../assets/icons/forward.png')} />
-                        </TouchableOpacity>
-                    </View>
-                    <CelebrityCard />
-                </View>
+            <View style={styles.listContainer}>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={HomeScreenData}
+                    renderItem={({ item, index }) => {
+                        return (
+                            item.listType === 'filters' ? (
+                                <CelebrityFilters
+                                    selectedFilterIndex={selectedFilterIndex}
+                                    filters={item.data}
+                                    onSelectFilter={setSelectedFilterIndex}
+                                />
+                            ) : (
+                                <View style={{ marginTop: index === 0 ? 29 : 0 }}>
+                                    <CelebrityList
+                                        onPressCelebrity={() => navigation.navigate('CelebrityProfile')}
+                                        celebrities={item.data}
+                                        isFeatured={item.featured ?? false}
+                                        heading={item.heading ?? ''}
+                                    />
+                                </View>
+                            )
+                        )
+                    }}
+                />
             </View>
-        </View>
+        </View >
     )
 }
 
@@ -35,5 +53,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#121214'
-    }
+    },
+    listContainer: { marginLeft: 20, marginBottom: 20, flex: 1 }
 });
